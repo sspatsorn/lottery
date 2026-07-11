@@ -15,6 +15,10 @@ export default defineNuxtConfig({
     strict: true,
   },
 
+  nitro: {
+    preset: 'node-server',
+  },
+
   app: {
     head: {
       title: 'สุ่มเลขนำโชค',

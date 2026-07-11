@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: lucky-lottery
+    name: frontend-lottery
     runtime: node
     rootDir: frontend
     buildCommand: npm install && npm run build
@@ -8,5 +8,7 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "20"
+      - key: HOST
+        value: 0.0.0.0
       - key: GEMINI_API_KEY
         sync: false
