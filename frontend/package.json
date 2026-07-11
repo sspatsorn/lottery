@@ -7,7 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "start": "node .output/server/index.mjs",
     "postinstall": "nuxt prepare"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
     "@vite-pwa/nuxt": "^1.1.1",
