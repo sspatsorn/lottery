@@ -23,7 +23,13 @@ function loadFromStorage(): HistoryEntry[] {
 
 function saveToStorage(entries: HistoryEntry[]): void {
   if (!import.meta.client) return
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries))
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries))
+  }
+  catch {
+    // Safari private mode / storage quota
+  }
 }
 
 export function useHistory() {

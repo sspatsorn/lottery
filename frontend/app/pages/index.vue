@@ -37,7 +37,7 @@ const sections = [
 </script>
 
 <template>
-  <div class="min-h-dvh pb-24">
+  <div class="min-h-screen min-h-dvh pb-24">
     <header class="sticky top-0 z-40 border-b border-gray-200 bg-white/90 backdrop-blur-xl">
       <div class="mx-auto flex max-w-lg items-center justify-between px-4 py-3 sm:max-w-2xl sm:px-6 lg:max-w-4xl">
         <div class="flex items-center gap-2.5">

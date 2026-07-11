@@ -10,6 +10,8 @@ import {
 
 const model = defineModel<string>({ default: '' })
 
+const isIOS = ref(false)
+
 /** Date ภายใน picker — sync กับ string yyyy-MM-dd */
 const pickerDate = ref<Date | null>(null)
 
@@ -34,6 +36,7 @@ watch(pickerDate, (value) => {
 })
 
 const maxDate = new Date()
+const maxDateString = toBirthDateString(maxDate)
 
 const dateFormats = {
   input: (date: Date) => formatBuddhistInput(date),
@@ -45,10 +48,31 @@ const BUDDHIST_ERA_OFFSET = 543
 function toBuddhistYear(year: number): number {
   return year + BUDDHIST_ERA_OFFSET
 }
+
+function handleNativeInput(event: Event) {
+  const value = (event.target as HTMLInputElement).value
+  model.value = value
+}
+
+onMounted(() => {
+  isIOS.value =
+    /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+})
 </script>
 
 <template>
+  <input
+    v-if="isIOS"
+    type="date"
+    class="native-date-input"
+    :value="model"
+    :max="maxDateString"
+    @input="handleNativeInput"
+  >
+
   <VueDatePicker
+    v-else
     v-model="pickerDate"
     :locale="th"
     :formats="dateFormats"
@@ -57,7 +81,7 @@ function toBuddhistYear(year: number): number {
     :dark="false"
     :text-input="false"
     auto-apply
-    teleport
+    teleport="body"
     clearable
     placeholder="เลือกวันเกิด (พ.ศ.)"
     class="birth-datepicker"
@@ -75,6 +99,26 @@ function toBuddhistYear(year: number): number {
 </template>
 
 <style>
+.native-date-input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  background: #ffffff;
+  color: #1f2937;
+  font-family: 'Noto Sans Thai', system-ui, sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 2.75rem;
+}
+
+.native-date-input:focus {
+  border-color: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
+  outline: none;
+}
+
 .birth-datepicker {
   width: 100%;
   --dp-font-family: 'Noto Sans Thai', system-ui, sans-serif;

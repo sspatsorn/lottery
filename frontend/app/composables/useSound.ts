@@ -5,15 +5,20 @@ export function useSound() {
   function getContext(): AudioContext | null {
     if (!import.meta.client) return null
     if (!audioCtx) {
-      audioCtx = new AudioContext()
+      const AudioContextClass =
+        window.AudioContext
+        || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+      if (!AudioContextClass) return null
+      audioCtx = new AudioContextClass()
     }
     return audioCtx
   }
 
   /** เสียง tick ระหว่างหมุนสล็อต */
   function playTick() {
-    const ctx = getContext()
-    if (!ctx) return
+    try {
+      const ctx = getContext()
+      if (!ctx) return
 
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
@@ -27,12 +32,17 @@ export function useSound() {
 
     osc.start(ctx.currentTime)
     osc.stop(ctx.currentTime + 0.05)
+    }
+    catch {
+      // Safari อาจบล็อกเสียงก่อน user interaction
+    }
   }
 
   /** เสียงเมื่อหยุดและได้เลข */
   function playWin() {
-    const ctx = getContext()
-    if (!ctx) return
+    try {
+      const ctx = getContext()
+      if (!ctx) return
 
     const notes = [523.25, 659.25, 783.99]
     notes.forEach((freq, i) => {
@@ -50,6 +60,10 @@ export function useSound() {
       osc.start(start)
       osc.stop(start + 0.3)
     })
+    }
+    catch {
+      // ignore audio errors
+    }
   }
 
   /** เปิด AudioContext หลัง user interaction */

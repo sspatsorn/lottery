@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: import.meta.dev },
 
   modules: ['@nuxtjs/tailwindcss', '@vite-pwa/nuxt'],
 
@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'th' },
       meta: [
         { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'description', content: 'เว็บสุ่มเลขหวยนำโชค พร้อมวิเคราะห์เลขมงคลด้วย Gemini AI' },
         { name: 'theme-color', content: '#ffffff' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
@@ -42,6 +42,7 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: 'autoUpdate',
+    injectRegister: false,
     manifest: {
       name: 'สุ่มเลขนำโชค',
       short_name: 'เลขนำโชค',
@@ -61,12 +62,8 @@ export default defineNuxtConfig({
         },
       ],
     },
-    workbox: {
-      navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
-    },
     devOptions: {
-      enabled: true,
+      enabled: false,
     },
   },
 })

@@ -299,12 +299,17 @@ onUnmounted(() => {
   font-weight: 800;
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  background: linear-gradient(180deg, #f59e0b 0%, #d97706 55%, #b45309 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(180, 83, 9, 0.2));
-  transition: transform 0.1s ease;
+  color: #d97706;
+}
+
+@supports (-webkit-background-clip: text) {
+  .reel__digit {
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 55%, #b45309 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
 }
 
 @media (min-width: 640px) {
