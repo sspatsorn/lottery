@@ -14,7 +14,6 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@vite-pwa/nuxt": "^1.1.1",
     "@vuepic/vue-datepicker": "^14.0.0",
     "date-fns": "^4.4.0",
     "nuxt": "^4.4.8",

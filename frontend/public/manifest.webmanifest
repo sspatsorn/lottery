@@ -1,0 +1,19 @@
+{
+  "name": "สุ่มเลขนำโชค",
+  "short_name": "เลขนำโชค",
+  "description": "เว็บสุ่มเลขหวยนำโชค พร้อมวิเคราะห์เลขมงคล",
+  "theme_color": "#ffffff",
+  "background_color": "#f9fafb",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "th",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

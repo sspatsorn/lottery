@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: import.meta.dev },
 
-  modules: ['@nuxtjs/tailwindcss', '@vite-pwa/nuxt'],
+  modules: ['@nuxtjs/tailwindcss'],
 
   css: ['~/assets/css/main.css'],
 
@@ -40,34 +40,8 @@ export default defineNuxtConfig({
         },
         { rel: 'apple-touch-icon', href: '/pwa-icon.svg' },
         { rel: 'icon', type: 'image/svg+xml', href: '/pwa-icon.svg' },
+        { rel: 'manifest', href: '/manifest.webmanifest' },
       ],
-    },
-  },
-
-  pwa: {
-    registerType: 'autoUpdate',
-    injectRegister: false,
-    manifest: {
-      name: 'สุ่มเลขนำโชค',
-      short_name: 'เลขนำโชค',
-      description: 'เว็บสุ่มเลขหวยนำโชค พร้อมวิเคราะห์เลขมงคล',
-      theme_color: '#ffffff',
-      background_color: '#f9fafb',
-      display: 'standalone',
-      orientation: 'portrait-primary',
-      lang: 'th',
-      start_url: '/',
-      icons: [
-        {
-          src: '/pwa-icon.svg',
-          sizes: '512x512',
-          type: 'image/svg+xml',
-          purpose: 'any maskable',
-        },
-      ],
-    },
-    devOptions: {
-      enabled: false,
     },
   },
 })
